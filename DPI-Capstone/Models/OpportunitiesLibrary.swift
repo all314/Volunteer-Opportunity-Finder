@@ -7,13 +7,13 @@
 
 import Foundation
 
-let Opportunities: [Opportunity] = [
+/*let Opportunities: [Opportunity] = [
     Opportunity(lat: <#T##Double#>,
                 long: <#T##Double#>,
                 interestTags: <#T##[Interests]#>,
                 organization: <#T##String#>,
                 description: <#T##String#>,
-                date: <#T##Date#>),
+                date: Date),
     Opportunity(lat: <#T##Double#>,
                 long: <#T##Double#>,
                 interestTags: <#T##[Interests]#>,
@@ -57,3 +57,4 @@ let Opportunities: [Opportunity] = [
                 description: <#T##String#>,
                 date: <#T##Date#>),
         ]
+*/

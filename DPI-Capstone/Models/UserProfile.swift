@@ -33,3 +33,4 @@ struct Opportunity {
     var date: Date
     
 }
+
