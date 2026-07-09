@@ -21,15 +21,18 @@ struct UserProfile {
     var lat: Double
     var long: Double
     var interests: [Interests]
-    var mileRadius: Int
+    var mileRadius: Double
+    var age: Int
 }
 
 struct Opportunity {
     var lat: Double
     var long: Double
-    var interestTags: [Interests]
+    var interestTag: Interests
     var organization: String
     var description: String
-    var date: Date
+    var date: DateComponents
+    var commitment: Int
+    var minimumAge: Int
     
 }
