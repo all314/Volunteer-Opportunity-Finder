@@ -36,3 +36,4 @@ struct Opportunity {
     var minimumAge: Int
     
 }
+

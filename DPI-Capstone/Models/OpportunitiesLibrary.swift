@@ -7,6 +7,7 @@
 
 import Foundation
 
+<<<<<<< HEAD
 let Opportunities: [Opportunity] = [
     Opportunity(lat: 41.844,
                 long: 87.71,
@@ -72,4 +73,56 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 11),
                 commitment: 1,
                 minimumAge: 12)
+=======
+/*let Opportunities: [Opportunity] = [
+    Opportunity(lat: <#T##Double#>,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: Date),
+    Opportunity(lat: <#T##Double#>,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: <#T##Date#>),
+    Opportunity(lat: 132.143,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: <#T##Date#>),
+    Opportunity(lat: <#T##Double#>,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: <#T##Date#>),
+    Opportunity(lat: <#T##Double#>,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: <#T##Date#>),
+    Opportunity(lat: <#T##Double#>,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: <#T##Date#>),
+    Opportunity(lat: <#T##Double#>,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: <#T##Date#>),
+    Opportunity(lat: <#T##Double#>,
+                long: <#T##Double#>,
+                interestTags: <#T##[Interests]#>,
+                organization: <#T##String#>,
+                description: <#T##String#>,
+                date: <#T##Date#>),
+>>>>>>> main
         ]
+*/
