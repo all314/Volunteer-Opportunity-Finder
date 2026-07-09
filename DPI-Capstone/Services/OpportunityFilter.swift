@@ -6,12 +6,10 @@
 //
 
 import Foundation
-let userProfile = UserProfile(name: "Alina", lat: 42.88, long: 67.55, interests: [.artMusic, .healthcare], mileRadius: 10, age: 16)
+let userProfile = UserProfile(name: "Alina", lat: 42.88, long: 6-7.55, interests: [.artMusic, .healthcare, .humanService], mileRadius: 10000, age: 16)
 
 let filteredOpportunities = Opportunities.filter { opportunity in
-    userProfile.interests.contains(opportunity.interestTag)
-    userProfile.age >= opportunity.minimumAge
-    return haversine(lat1: userProfile.lat, long1: userProfile.long, lat2: opportunity.lat, long2: opportunity.long) <= userProfile.mileRadius
-    
-    
+    userProfile.interests.contains(opportunity.interestTag) &&
+    userProfile.age >= opportunity.minimumAge &&
+    haversine(lat1: userProfile.lat, long1: userProfile.long, lat2: opportunity.lat, long2: opportunity.long) <= userProfile.mileRadius
 }
