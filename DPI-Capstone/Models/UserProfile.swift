@@ -34,6 +34,7 @@ struct Opportunity {
     var date: DateComponents
     var commitment: Int
     var minimumAge: Int
+    var logo: String
     
 }
 
