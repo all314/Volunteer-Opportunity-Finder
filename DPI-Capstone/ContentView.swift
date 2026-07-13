@@ -32,7 +32,7 @@ struct ContentView: View {
                     Text("Volunteer Finder")
                         .font(.system(size: 34, weight: .bold))
 
-                    Text("Discover volunteer opportunities near you")
+                    Text("Explore volunteer opportunities near you")
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 }
@@ -56,20 +56,18 @@ struct ContentView: View {
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 14))
 
-                    Button {
+                    NavigationLink {
                         
-                        //add navigation to next screen here
+                        Home()
                         
                     } label: {
-                        HStack {
-                            Text("Next")
-                                .fontWeight(.semibold)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(red: 0.39, green: 0.60, blue: 0.43))
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        Text("Next")
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 0.39, green: 0.60, blue: 0.43))
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
 
                 }
@@ -87,5 +85,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    NavigationStack{
+        ContentView()
+    }
+   
 }

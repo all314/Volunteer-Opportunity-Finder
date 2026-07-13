@@ -11,7 +11,10 @@ import SwiftUI
 struct DPI_CapstoneApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack{
+                ContentView()
+            }
+            
         }
     }
 }
