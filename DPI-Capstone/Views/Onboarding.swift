@@ -14,5 +14,5 @@ struct Onboarding: View {
 }
 
 #Preview {
-    Onboarding()
+    InterestsView()
 }

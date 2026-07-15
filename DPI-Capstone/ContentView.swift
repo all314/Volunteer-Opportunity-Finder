@@ -58,7 +58,7 @@ struct ContentView: View {
 
                     NavigationLink {
                         
-                        Home()
+                        InterestsView()
                         
                     } label: {
                         Text("Next")
@@ -72,7 +72,7 @@ struct ContentView: View {
 
                 }
                 .padding(25)
-                .background(Color(red: 0.92, green: 0.88, blue: 0.78)).clipShape(RoundedRectangle(cornerRadius: 28))
+                .background(Color.beige).clipShape(RoundedRectangle(cornerRadius: 28))
                 .shadow(color: .black.opacity(0.08), radius: 15, y: 8)
                 .padding(.horizontal)
 
