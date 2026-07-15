@@ -10,7 +10,7 @@ struct ContentView: View {
 
         ZStack {
 
-            Color(red: 0.93, green: 0.96, blue: 0.91)
+            Color(.offWhite)
                 .ignoresSafeArea()
 
             VStack(spacing: 30) {
@@ -19,7 +19,7 @@ struct ContentView: View {
 
                 ZStack {
                     Circle()
-                        .fill(Color(red: 0.56, green: 0.72, blue: 0.58))
+                        .fill(Color.lightGreen)
                         .frame(width: 95, height: 95)
 
                     Image(systemName: "leaf.circle.fill")
@@ -29,17 +29,17 @@ struct ContentView: View {
 
                 VStack(spacing: 8) {
 
-                    Text("Volunteer Finder")
+                    Text("SwiftSearcher")
                         .font(.system(size: 34, weight: .bold))
 
-                    Text("Explore volunteer opportunities near you")
+                    Text("Explore volunteer opportunities near you!")
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 }
 
                 VStack(spacing: 18) {
 
-                    TextField("Your Name", text: $name)
+                    TextField("Name", text: $name)
                         .padding()
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 14))
@@ -65,7 +65,7 @@ struct ContentView: View {
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color(red: 0.39, green: 0.60, blue: 0.43))
+                            .background(Color.darkerGreen)
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
