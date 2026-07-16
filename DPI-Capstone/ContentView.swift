@@ -3,8 +3,8 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var name: String = ""
-    @State private var lat: Double? = nil
-    @State private var long: Double? = nil
+    @State var lat: Double? = nil
+    @State var long: Double? = nil
     @State private var mileRadius: Int? = nil
     @State private var age: Int? = nil
 
