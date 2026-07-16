@@ -1,3 +1,5 @@
+//Lat: 41.885826  Long: -87.626955
+
 import SwiftUI
 
 struct ContentView: View {
@@ -72,13 +74,7 @@ struct ContentView: View {
 
                     NavigationLink {
                         
-                        InterestsView(
-                                name: name,
-                                lat: lat ?? 0,
-                                long: long ?? 0,
-                                mileRadius: Double(mileRadius ?? 0),
-                                age: age ?? 0
-                            )
+                        InterestsView()
                         
                     } label: {
                         Text("Next")
