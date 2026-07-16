@@ -3,8 +3,10 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var name: String = ""
-    @State private var latitude: Double? = nil
-    @State private var longitude: Double? = nil
+    @State private var lat: Double? = nil
+    @State private var long: Double? = nil
+    @State private var mileRadius: Int? = nil
+    @State private var age: Int? = nil
 
     var body: some View {
 
@@ -43,14 +45,26 @@ struct ContentView: View {
                         .padding()
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 14))
-
-                    TextField("Latitude", value: $latitude, format: .number)
+                    
+                    TextField("Age", value: $age, format: .number)
                         .keyboardType(.decimalPad)
                         .padding()
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 14))
 
-                    TextField("Longitude", value: $longitude, format: .number)
+                    TextField("Latitude", value: $lat, format: .number)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+
+                    TextField("Longitude", value: $long, format: .number)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                    
+                    TextField("Mile Radius", value: $mileRadius, format: .number)
                         .keyboardType(.decimalPad)
                         .padding()
                         .background(Color.white)
@@ -58,7 +72,13 @@ struct ContentView: View {
 
                     NavigationLink {
                         
-                        InterestsView()
+                        InterestsView(
+                                name: name,
+                                lat: lat ?? 0,
+                                long: long ?? 0,
+                                mileRadius: Double(mileRadius ?? 0),
+                                age: age ?? 0
+                            )
                         
                     } label: {
                         Text("Next")
