@@ -1,10 +1,3 @@
-//
-//  OpportunitiesLibrary.swift
-//  DPI-Capstone
-//
-//  Created by DPI Student 009 on 7/9/26.
-//
-
 import Foundation
 
 
@@ -17,7 +10,8 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 11),
                 commitment: 3,
                 minimumAge: 10,
-                logo: "Paws"),
+                logo: "Paws",
+                address: "1997 N Clybourn Ave"),
     Opportunity(lat: 42.05,
                 long: -82.65,
                 interestTag: .humanService,
@@ -26,7 +20,8 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 11),
                 commitment: 5,
                 minimumAge: 12,
-                logo: "ConnectionsForHomeless"),
+                logo: "ConnectionsForHomeless",
+                address: "2121 Dewey Avenue"),
     Opportunity(lat: 41.89,
                 long: -87.62,
                 interestTag: .humanService,
@@ -35,7 +30,8 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 11),
                 commitment: 4,
                 minimumAge: 13,
-                logo: "ChicagoRiver"),
+                logo: "ChicagoRiver",
+                address: "121 W. Wacker Drive"),
     Opportunity(lat: 41.87,
                 long: -87.68,
                 interestTag: .humanService,
@@ -44,7 +40,8 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 11),
                 commitment: 2,
                 minimumAge: 16,
-                logo: "RedCross"),
+                logo: "RedCross",
+                address: "2200 W. Harrison St."),
     Opportunity(lat: 41.94,
                 long: -87.69,
                 interestTag: .artMusic,
@@ -53,7 +50,8 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 11),
                 commitment: 3,
                 minimumAge: 12,
-                logo: "CradlesToCrayons"),
+                logo: "CradlesToCrayons",
+                address: "2500 W. Bradley Place"),
     Opportunity(lat: 41.88,
                 long: -87.64,
                 interestTag: .tutoring,
@@ -62,7 +60,8 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 15),
                 commitment: 6,
                 minimumAge: 15,
-                logo: "TutoringChi"),
+                logo: "TutoringChi",
+                address: "2145 N. Halsted St."),
     Opportunity(lat: 41.88,
                 long: -87.62,
                 interestTag: .humanService,
@@ -71,7 +70,8 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 28),
                 commitment: 3,
                 minimumAge: 10,
-                logo: "GraceNetwork"),
+                logo: "GraceNetwork",
+                address: "200 N. Clark St."),
     Opportunity(lat: 41.89,
                 long: -87.62,
                 interestTag: .artMusic,
@@ -80,5 +80,6 @@ let Opportunities: [Opportunity] = [
                 date: DateComponents(month: 7, day: 11),
                 commitment: 1,
                 minimumAge: 12,
-                logo: "Clare")
+                logo: "Clare",
+                address: "55 E. Pearson St.")
 ]

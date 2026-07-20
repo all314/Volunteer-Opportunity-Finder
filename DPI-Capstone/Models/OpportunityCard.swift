@@ -11,6 +11,8 @@ struct OpportunityCard: View {
     
     let opportunity: Opportunity
     
+    
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             
@@ -30,8 +32,7 @@ struct OpportunityCard: View {
                     icon: "mappin",
                     lines: [
                         "\(haversine(lat1: 37.7749, long1: -122.4194, lat2: 37.7749, long2: -122.4194)) miles away",
-                        "67 Wabash Ave",
-                        "Chicago, IL"
+                        "\(opportunity.address)"
                     ]
                 )
                 

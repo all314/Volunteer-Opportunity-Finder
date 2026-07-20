@@ -1,13 +1,18 @@
-//Lat: 41.885826  Long: -87.626955
+//
+//  ProfileView.swift
+//  DPI-Capstone
+//
+//  Created by DPI Student 009 on 7/20/26.
+//
 
 import SwiftUI
 
-struct ContentView: View {
+struct ProfileView: View {
 
     @State private var name: String = ""
-    @State private var lat: Double = 0.0
-    @State private var long: Double = 0.0
-    @State private var mileRadius: Int = 0
+    @State private var lat: Double? = nil
+    @State private var long: Double? = nil
+    @State private var mileRadius: Int? = nil
     @State private var age: Int? = nil
 
     var body: some View {
@@ -73,16 +78,9 @@ struct ContentView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 14))
 
                     NavigationLink {
-                        InterestsView(
-                            user: UserProfile(
-                                name: name,
-                                lat: lat,
-                                long: long,
-                                interests: [],
-                                mileRadius: Double(mileRadius),
-                                age: age ?? 0
-                            )
-                        )
+                        
+                        InterestsView()
+                        
                     } label: {
                         Text("Next")
                             .fontWeight(.semibold)
@@ -109,7 +107,7 @@ struct ContentView: View {
 
 #Preview {
     NavigationStack{
-        ContentView()
+        ProfileView()
     }
    
 }

@@ -13,13 +13,24 @@ struct Home: View {
             Color.offWhite
                 .ignoresSafeArea()
             VStack{
+<<<<<<< HEAD
+
+=======
+                
+>>>>>>> 93857e2 (started building profile view)
+                Spacer()
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(Color.darkerGreen)
-                    .padding(.horizontal)
+                    .padding()
                 
-                HStack{
-                    
+                ScrollView {LazyVStack(spacing: 20) {
+                                ForEach(filteredOpportunities){
+                                    opportunity in OpportunityCard(opportunity: opportunity)
+                                        }
+                                    }
+                .padding()
+            
                 }
             }
         }
