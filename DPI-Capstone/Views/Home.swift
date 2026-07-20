@@ -13,7 +13,11 @@ struct Home: View {
             Color.offWhite
                 .ignoresSafeArea()
             VStack{
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 93857e2 (started building profile view)
                 Spacer()
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
