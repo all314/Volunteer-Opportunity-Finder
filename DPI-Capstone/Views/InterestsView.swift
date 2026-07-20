@@ -83,8 +83,7 @@ struct InterestsView: View {
                 .padding(.horizontal, 24)
 
                 NavigationLink {
-                    // Replace NextView() with your next screen
-                    Text("Next Screen")
+                    Home(userProfile: UserProfile(name: user.name, lat: user.lat, long: user.long, interests: Array(selectedOptions), mileRadius: user.mileRadius, age: user.age))
                 } label: {
                     Text("Next")
                         .fontWeight(.semibold)
