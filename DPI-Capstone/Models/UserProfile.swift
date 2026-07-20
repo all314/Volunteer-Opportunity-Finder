@@ -25,7 +25,9 @@ struct UserProfile {
     var age: Int
 }
 
-struct Opportunity {
+struct Opportunity: Identifiable {
+    let id = UUID()
+    
     var lat: Double
     var long: Double
     var interestTag: Interests
@@ -35,6 +37,7 @@ struct Opportunity {
     var commitment: Int
     var minimumAge: Int
     var logo: String
+    var address: String
     
 }
 
