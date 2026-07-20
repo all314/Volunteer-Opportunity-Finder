@@ -13,7 +13,7 @@ struct Home: View {
             Color.offWhite
                 .ignoresSafeArea()
             VStack{
-                
+
                 Spacer()
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
