@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct InterestsView: View {
-    
+
     @State private var selectedOptions: Set<String> = ["All"]
-    
+
     let options = [
         "Animal Welfare",
         "Human Services",
@@ -12,7 +12,7 @@ struct InterestsView: View {
         "Tutoring",
         "Art & Music"
     ]
-    
+
     let icons: [String: String] = [
         "Animal Welfare": "pawprint.fill",
         "Human Services": "person.2.fill",
@@ -21,84 +21,86 @@ struct InterestsView: View {
         "Tutoring": "book.fill",
         "Art & Music": "paintpalette.fill"
     ]
-    
+
+    private let sage = Color(red: 0.42, green: 0.60, blue: 0.47)
+    private let beige = Color(red: 0.98, green: 0.97, blue: 0.94)
+
+    private let columns = [
+        GridItem(.adaptive(minimum: 160), spacing: 16)
+    ]
+
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            VStack(spacing: 12) {
-                
-                ForEach(options, id: \.self) { option in
-                    let isSelected = selectedOptions.contains(option)
-                    
-                    Button {
-                        toggleSelection(for: option)
-                    } label: {
-                        HStack(spacing: 8) {
-                            
-                            Image(systemName: icons[option] ?? "circle.fill")
-                                .font(.system(size: 14, weight: .semibold))
-                            
-                            Text(option)
-                                .font(.system(size: 15, weight: .semibold))
-                            
-                            if isSelected {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 13))
-                                    .transition(.scale)
+        ZStack {
+            beige
+                .ignoresSafeArea()
+
+            VStack {
+                Spacer()
+
+                LazyVGrid(columns: columns, spacing: 18) {
+                    ForEach(options, id: \.self) { option in
+                        let isSelected = selectedOptions.contains(option)
+
+                        Button {
+                            toggleSelection(for: option)
+                        } label: {
+                            HStack(spacing: 8) {
+
+                                Image(systemName: icons[option] ?? "circle.fill")
+                                    .font(.system(size: 15, weight: .semibold))
+
+                                Text(option)
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .multilineTextAlignment(.leading)
+
+                                Spacer()
+
+                                if isSelected {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .font(.system(size: 14))
+                                }
                             }
+                            .foregroundColor(isSelected ? sage : .primary)
+                            .padding()
+                            .frame(maxWidth: .infinity, minHeight: 60)
+                            .background(
+                                RoundedRectangle(cornerRadius: 18)
+                                    .fill(isSelected ? sage.opacity(0.18) : Color.white.opacity(0.75))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 18)
+                                    .stroke(
+                                        isSelected ? sage : Color.gray.opacity(0.15),
+                                        lineWidth: 1
+                                    )
+                            )
+                            .shadow(
+                                color: .black.opacity(0.04),
+                                radius: 3,
+                                y: 2
+                            )
                         }
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 12)
-                        .background(
-                            Capsule()
-                                .fill(
-                                    isSelected
-                                    ? Color.blue.opacity(0.15)
-                                    : Color(.systemBackground)
-                                )
-                        )
-                        .overlay(
-                            Capsule()
-                                .stroke(
-                                    isSelected
-                                    ? Color.blue
-                                    : Color.gray.opacity(0.25),
-                                    lineWidth: 1
-                                )
-                        )
-                        .foregroundColor(
-                            isSelected
-                            ? .blue
-                            : .primary
-                        )
-                        .shadow(
-                            color: .black.opacity(0.06),
-                            radius: 6,
-                            x: 0,
-                            y: 3
-                        )
-                        .scaleEffect(isSelected ? 1.03 : 1)
+                        .buttonStyle(.plain)
+                        .animation(.easeInOut(duration: 0.2), value: isSelected)
                     }
-                    .buttonStyle(.plain)
-                    .animation(
-                        .spring(response: 0.3, dampingFraction: 0.75),
-                        value: isSelected
-                    )
                 }
+                .padding(.horizontal, 24)
+                .frame(maxWidth: 700)
+
+                Spacer()
             }
-            .padding(.horizontal)
-            .padding(.vertical, 6)
         }
     }
-    
+
     private func toggleSelection(for option: String) {
         if option == "All" {
             selectedOptions = ["All"]
         } else {
             selectedOptions.remove("All")
-            
+
             if selectedOptions.contains(option) {
                 selectedOptions.remove(option)
-                
+
                 if selectedOptions.isEmpty {
                     selectedOptions.insert("All")
                 }
