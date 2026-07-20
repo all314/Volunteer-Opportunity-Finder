@@ -5,9 +5,9 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var name: String = ""
-    @State private var lat: Double? = nil
-    @State private var long: Double? = nil
-    @State private var mileRadius: Int? = nil
+    @State private var lat: Double = 0.0
+    @State private var long: Double = 0.0
+    @State private var mileRadius: Int = 0
     @State private var age: Int? = nil
 
     var body: some View {
@@ -73,9 +73,16 @@ struct ContentView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 14))
 
                     NavigationLink {
-                        
-                        InterestsView()
-                        
+                        InterestsView(
+                            user: UserProfile(
+                                name: name,
+                                lat: lat,
+                                long: long,
+                                interests: [],
+                                mileRadius: Double(mileRadius),
+                                age: age ?? 0
+                            )
+                        )
                     } label: {
                         Text("Next")
                             .fontWeight(.semibold)
