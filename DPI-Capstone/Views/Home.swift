@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct Home: View {
+    @State var userProfile: UserProfile
+    
     var body: some View {
         ZStack{
             Color.offWhite
                 .ignoresSafeArea()
             VStack{
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 93857e2 (started building profile view)
                 Spacer()
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
@@ -40,5 +38,5 @@ struct Home: View {
 }
 
 #Preview {
-    Home()
+    Home(userProfile: UserProfile(name: "Alina", lat: 41.88, long: -87.62, interests: [.artMusic, .humanService, .animalWelfare], mileRadius: 20.0, age: 16))
 }

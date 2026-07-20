@@ -7,7 +7,7 @@ struct ContentView: View {
     @State private var name: String = ""
     @State private var lat: Double = 0.0
     @State private var long: Double = 0.0
-    @State private var mileRadius: Int = 0
+    @State private var mileRadius: Double = 0.0
     @State private var age: Int? = nil
 
     var body: some View {

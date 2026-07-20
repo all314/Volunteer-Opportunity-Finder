@@ -10,10 +10,10 @@ import SwiftUI
 struct ProfileView: View {
 
     @State private var name: String = ""
-    @State private var lat: Double? = nil
-    @State private var long: Double? = nil
-    @State private var mileRadius: Int? = nil
-    @State private var age: Int? = nil
+    @State private var lat: Double = 0
+    @State private var long: Double = 0
+    @State private var mileRadius: Double = 0
+    @State private var age: Int = 16
 
     var body: some View {
 
@@ -79,7 +79,7 @@ struct ProfileView: View {
 
                     NavigationLink {
                         
-                        InterestsView()
+                        InterestsView(user: UserProfile(name: name, lat: lat, long: long, interests: [], mileRadius: mileRadius, age: age))
                         
                     } label: {
                         Text("Next")
