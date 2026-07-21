@@ -33,7 +33,7 @@ struct Opportunity: Identifiable {
     var interestTag: Interests
     var organization: String
     var description: String
-    var date: DateComponents
+    var date: String
     var commitment: Int
     var minimumAge: Int
     var logo: String

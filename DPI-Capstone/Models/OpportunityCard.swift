@@ -11,7 +11,7 @@ struct OpportunityCard: View {
     
     let opportunity: Opportunity
     
-    
+    let userProfile: UserProfile
     
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
@@ -31,14 +31,18 @@ struct OpportunityCard: View {
                 InfoSection(
                     icon: "mappin",
                     lines: [
-                        "\(haversine(lat1: 37.7749, long1: -122.4194, lat2: 37.7749, long2: -122.4194)) miles away",
+                        //formats the mile distance, and adds the address of the organization.
+                        String(format: "%.1f miles away", haversine(lat1: userProfile.lat, long1: userProfile.long, lat2: opportunity.lat, long2: opportunity.long)),
                         "\(opportunity.address)"
                     ]
                 )
                 
                 InfoSection(
+                    
+                    //the times of the opportunity
+                    
                     icon: "clock",
-                    lines: ["7:00 AM - 5:00 PM"
+                    lines: [opportunity.date
                     ]
                 )
             }
@@ -84,6 +88,7 @@ struct OpportunityCard: View {
                 VStack(alignment: .leading, spacing: 3) {
                     ForEach(lines, id: \.self) { line in
                         Text(line)
+                            .font(.system(size: 16))
                     }
                 }
                 .foregroundStyle(Color.darkerGreen)
@@ -94,5 +99,5 @@ struct OpportunityCard: View {
     
 }
 #Preview {
-    OpportunityCard(opportunity: Opportunities[7])
+    OpportunityCard(opportunity: Opportunities[7], userProfile: UserProfile(name: "Alina", lat: 41.88, long: -87.62, interests: [.humanService, .healthcare], mileRadius: 15, age: 16))
 }
