@@ -23,8 +23,6 @@ struct InterestsView: View {
         .artMusic: "paintpalette"
     ]
 
-    private let sage = Color(red: 0.42, green: 0.60, blue: 0.47)
-    private let beige = Color(red: 0.98, green: 0.97, blue: 0.94)
 
     private let columns = [
         GridItem(.adaptive(minimum: 160), spacing: 16)
@@ -32,11 +30,18 @@ struct InterestsView: View {
 
     var body: some View {
         ZStack {
-            beige
+            Color.offWhite
                 .ignoresSafeArea()
 
             VStack {
+                
                 Spacer()
+                
+                Text("What opportunities are you interested in?")
+                    .font(.system(size: 30, weight: .semibold))
+                    .foregroundStyle(.sage)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 50)
 
                 LazyVGrid(columns: columns, spacing: 18) {
                     ForEach(options, id: \.self) { option in
@@ -56,22 +61,19 @@ struct InterestsView: View {
 
                                 Spacer()
 
-                                if isSelected {
-                                    Image(systemName: "checkmark.circle")
-                                        .font(.system(size: 14))
-                                }
+                        
                             }
-                            .foregroundColor(isSelected ? sage : .primary)
+                            .foregroundColor(isSelected ? Color.sage : .primary)
                             .padding()
                             .frame(maxWidth: .infinity, minHeight: 60)
                             .background(
                                 RoundedRectangle(cornerRadius: 18)
-                                    .fill(isSelected ? sage.opacity(0.18) : Color.white.opacity(0.75))
+                                    .fill(isSelected ? Color.sage.opacity(0.18) : Color.white.opacity(0.75))
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 18)
                                     .stroke(
-                                        isSelected ? sage : Color.gray.opacity(0.15),
+                                        isSelected ? Color.sage : Color.gray.opacity(0.15),
                                         lineWidth: 1
                                     )
                             )
@@ -83,14 +85,13 @@ struct InterestsView: View {
                 .padding(.horizontal, 24)
 
                 NavigationLink {
-                    // Replace NextView() with your next screen
-                    Text("Next Screen")
+                    Home(userProfile: UserProfile(name: user.name, lat: user.lat, long: user.long, interests: Array(selectedOptions), mileRadius: user.mileRadius, age: user.age))
                 } label: {
                     Text("Next")
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(sage)
+                        .background(Color.sage)
                         .foregroundColor(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }

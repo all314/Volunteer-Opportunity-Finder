@@ -8,35 +8,56 @@
 import SwiftUI
 
 struct Home: View {
-    @State var userProfile: UserProfile
-    
+    let userProfile: UserProfile
+
+    var filteredOpportunities: [Opportunity] {
+        Opportunities.filter { opportunity in
+            userProfile.interests.contains(opportunity.interestTag) &&
+            userProfile.age >= opportunity.minimumAge &&
+            haversine(
+                lat1: userProfile.lat,
+                long1: userProfile.long,
+                lat2: opportunity.lat,
+                long2: opportunity.long
+            ) <= userProfile.mileRadius
+        }
+    }
+
     var body: some View {
-        ZStack{
+        ZStack {
             Color.offWhite
                 .ignoresSafeArea()
-            VStack{
 
+            VStack {
                 Spacer()
+
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(Color.darkerGreen)
                     .padding()
-                
-                ScrollView {LazyVStack(spacing: 20) {
-                                ForEach(filteredOpportunities){
-                                    opportunity in OpportunityCard(opportunity: opportunity)
-                                        }
-                                    }
-                .padding()
-            
+
+                ScrollView {
+                    LazyVStack(spacing: 20) {
+                        ForEach(filteredOpportunities) { opportunity in
+                            OpportunityCard(opportunity: opportunity)
+                        }
+                    }
+                    .padding()
                 }
             }
         }
-        
-      
     }
 }
 
 #Preview {
-    Home(userProfile: UserProfile(name: "Alina", lat: 41.88, long: -87.62, interests: [.artMusic, .humanService, .animalWelfare], mileRadius: 20.0, age: 16))
+    Home(
+        userProfile: UserProfile(
+            name: "Alina",
+            lat: 41.88,
+            long: -87.62,
+            interests: [.artMusic, .animalWelfare],
+            mileRadius: 20.0,
+            age: 16
+        )
+    )
 }
