@@ -38,6 +38,8 @@ struct Opportunity: Identifiable {
     var minimumAge: Int
     var logo: String
     var address: String
+    var website: String
+    var contact: String
     
 }
 

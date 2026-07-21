@@ -55,7 +55,22 @@ struct OpportunityCard: View {
             Text(opportunity.description)
                 .foregroundStyle(Color.darkerGreen)
             
-            Spacer()
+            
+            HStack{
+                //why aren't the icons showing up?
+                Image(systemName: "link")
+                Link("Website Link", destination: URL(string: "\(opportunity.website)")!)
+            }
+            
+            HStack{
+                Image(systemName: "envelope.badge.person.crop.fill")
+                    .padding(.vertical, 2)
+                Link("Contact Info", destination: URL(string: "\(opportunity.contact)")!)
+            }
+            
+            
+            
+            
         }
         .padding(26)
         .frame(maxWidth: .infinity, minHeight: 520, alignment: .topLeading)
@@ -70,6 +85,8 @@ struct OpportunityCard: View {
                 )
         }
         .padding(.horizontal, 20)
+        
+        
     }
     
     struct InfoSection: View {
