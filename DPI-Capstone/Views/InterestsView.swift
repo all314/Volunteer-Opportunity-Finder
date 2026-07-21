@@ -39,7 +39,6 @@ struct InterestsView: View {
                 
                 Text("What opportunities are you interested in?")
                     .font(.system(size: 30, weight: .semibold))
-                    .foregroundStyle(.sage)
                     .padding(.horizontal, 20)
                     .padding(.bottom, 50)
 

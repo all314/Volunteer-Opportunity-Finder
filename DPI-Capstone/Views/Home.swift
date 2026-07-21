@@ -33,13 +33,12 @@ struct Home: View {
 
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
-                    .foregroundStyle(Color.darkerGreen)
                     .padding()
 
                 ScrollView {
                     LazyVStack(spacing: 20) {
                         ForEach(filteredOpportunities) { opportunity in
-                            OpportunityCard(opportunity: opportunity)
+                            OpportunityCard(opportunity: opportunity, userProfile: userProfile)
                         }
                     }
                     .padding()
