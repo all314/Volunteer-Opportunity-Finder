@@ -40,6 +40,11 @@ struct Home: View {
                         ForEach(filteredOpportunities) { opportunity in
                             OpportunityCard(opportunity: opportunity, userProfile: userProfile)
                         }
+                        
+                        if filteredOpportunities.isEmpty {
+                            Text("No opportunities match your filters. Try changing your interests.")
+                                .foregroundColor(.secondary)
+                        }
                     }
                     .padding()
                 }

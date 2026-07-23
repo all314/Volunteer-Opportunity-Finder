@@ -1,4 +1,4 @@
-//Lat: 41.885826  Long: -87.626955
+//Lat: 41.88  Long: -87.62
 
 import SwiftUI
 
@@ -23,20 +23,22 @@ struct ContentView: View {
 
                 ZStack {
                     Circle()
-                        .fill(Color.lightGreen)
+                        .fill(Color.sage)
                         .frame(width: 95, height: 95)
 
-                    Image(systemName: "leaf.circle.fill")
-                        .font(.system(size: 50))
-                        .foregroundStyle(.white)
+                    Image("AppLogo")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 80)
+                        .clipShape(Circle())     // makes the image itself circular
                 }
 
                 VStack(spacing: 8) {
 
-                    Text("SwiftSearcher")
+                    Text("VolunTrack")
                         .font(.system(size: 34, weight: .bold))
 
-                    Text("Explore volunteer opportunities near you!")
+                    Text("See a need...take the lead!")
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 }
