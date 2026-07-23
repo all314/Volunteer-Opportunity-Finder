@@ -1,11 +1,8 @@
 {
   "images" : [
     {
-<<<<<<< HEAD
+
       "filename" : "Image.png",
-=======
-      "filename" : "Image copy.png",
->>>>>>> f7bccfb (changes)
       "idiom" : "universal",
       "scale" : "1x"
     },
