@@ -60,62 +60,89 @@ struct Home: View {
                 
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
-                    .padding()
-                ZStack{
-                    RoundedRectangle(cornerRadius: 18)
-                        .fill(Color.darkerGreen)
-                        .frame(width: 365, height: 50)
+                    .padding(.top)
+
+                
+                
+                if !filteredOpportunities.isEmpty{
+                    
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 18)
+                            .fill(Color.darkerGreen)
+                            .frame(width: 365, height: 50)
+                            
                         
+                        HStack {
+                            Text("Sort by:")
+                                .foregroundStyle(Color.offWhite)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(.leading, 50)
+                        
+                            Spacer()
+                            
+                            Button {
+                                sortByDistance = true
+                            } label: {
+                                Text("Distance")
+                                    .fontWeight(.semibold)
+                                    .frame(width: 120, height: 30)
+                                    .background(Color.beige)
+                                    .foregroundColor(.darkerGreen)
+                                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                            }
+                            
+                            Button {
+                                sortByDistance = false
+                            } label: {
+                                Text("Date")
+                                    .fontWeight(.semibold)
+                                    .frame(width: 70, height: 30)
+                                    .background(Color.beige)
+                                    .foregroundColor(.darkerGreen)
+                                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                            }
+                            
+                            
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                        }
+                    }
                     
-                    HStack {
-                        Text("Sort by:")
-                            .foregroundStyle(Color.offWhite)
-                            .font(.system(size: 18, weight: .bold))
-                            .padding(.leading, 50)
-                    
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(filteredOpportunities) { opportunity in
+                                OpportunityCard(
+                                    opportunity: opportunity,
+                                    userProfile: userProfile
+                                )
+                            }
+                        }
+                        .padding(.top)
+                    }
+                } else{
+                        
+                    VStack(alignment: .center){
                         Spacer()
                         
-                        Button {
-                            sortByDistance = true
-                        } label: {
-                            Text("Distance")
+                        Image(systemName: "exclamationmark.message.fill")
+                            .resizable()
+                            .scaledToFill()
+                            .foregroundStyle(.darkerGreen)
+                            .frame(width: 70, height: 70)
+                        
+                        
+                            Text("No match found! Try updating your parameters.")
+                            .font(.system(size: 24))
+                                .padding()
                                 .fontWeight(.semibold)
-                                .frame(width: 120, height: 30)
-                                .background(Color.beige)
-                                .foregroundColor(.darkerGreen)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                        }
-                        
-                        Button {
-                            sortByDistance = false
-                        } label: {
-                            Text("Date")
-                                .fontWeight(.semibold)
-                                .frame(width: 70, height: 30)
-                                .background(Color.beige)
-                                .foregroundColor(.darkerGreen)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                        }
-                        
-                        
-                        Spacer()
+                                .foregroundStyle(.darkerGreen)
                         Spacer()
                         Spacer()
                     }
+                    
                 }
                 
-
-                ScrollView {
-                    LazyVStack {
-                        ForEach(filteredOpportunities) { opportunity in
-                            OpportunityCard(
-                                opportunity: opportunity,
-                                userProfile: userProfile
-                            )
-                        }
-                    }
-                    .padding(.top)
-                }
             }
         }
     }
@@ -127,7 +154,7 @@ struct Home: View {
             name: "Alina",
             lat: 41.88,
             long: -87.62,
-            interests: [.artMusic, .animalWelfare],
+            interests: [],
             mileRadius: 20.0,
             age: 16
         )
