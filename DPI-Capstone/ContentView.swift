@@ -11,7 +11,6 @@ struct ContentView: View {
     @State private var mileRadius: Double? = nil
     @State private var age: Int? = nil
 
-
     var body: some View {
 
         ZStack {
