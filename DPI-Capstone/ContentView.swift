@@ -10,10 +10,7 @@ struct ContentView: View {
     @State var long: Double? = nil
     @State private var mileRadius: Double? = nil
     @State private var age: Int? = nil
-    
-    @ObservedObject private var locationService = DeviceLocationService.shared
-    @State private var showLocationDeniedAlert = false
-    @State private var cancellables = Set<AnyCancellable>()
+
 
     var body: some View {
 
