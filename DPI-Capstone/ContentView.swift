@@ -1,14 +1,19 @@
-//Lat: 41.88  Long: -87.62
+//Lat: 41.885826  Long: -87.626955
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
 
     @State private var name: String = ""
-    @State private var lat: Double? = nil
-    @State private var long: Double? = nil
+    @State var lat: Double? = nil
+    @State var long: Double? = nil
     @State private var mileRadius: Double? = nil
     @State private var age: Int? = nil
+    
+    @ObservedObject private var locationService = DeviceLocationService.shared
+    @State private var showLocationDeniedAlert = false
+    @State private var cancellables = Set<AnyCancellable>()
 
     var body: some View {
 
@@ -23,14 +28,14 @@ struct ContentView: View {
 
                 ZStack {
                     Circle()
-                        .fill(Color.sage)
-                        .frame(width: 95, height: 95)
+                        .fill(Color.darkerGreen)
+                        .frame(width: 100, height: 100)
 
                     Image("AppLogo")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 80)
-                        .clipShape(Circle())     // makes the image itself circular
+                        .clipShape(Circle())
                 }
 
                 VStack(spacing: 8) {
@@ -38,7 +43,7 @@ struct ContentView: View {
                     Text("VolunTrack")
                         .font(.system(size: 34, weight: .bold))
 
-                    Text("See a need...take the lead!")
+                    Text("See a need, take the lead!")
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 }
@@ -68,6 +73,23 @@ struct ContentView: View {
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 14))
                     
+                    Button{
+                        lat = 41.88581
+                        long = -87.62687
+                    } label:
+                    {
+                        Text("I'm at Harold Washington College")
+                            .font(.system(size: 15))
+                            .padding(.vertical, 4)
+                    }
+                    .padding(.horizontal)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: 265, maxHeight: 180)
+                        .background(Color.offWhite)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        
+                        
+                    
                     TextField("Mile Radius", value: $mileRadius, format: .number)
                         .keyboardType(.decimalPad)
                         .padding()
@@ -94,6 +116,8 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
+                    
+                    
 
                 }
                 .padding(25)
@@ -105,9 +129,12 @@ struct ContentView: View {
 
             }
             .padding()
+            
+           
+            }
         }
     }
-}
+
 
 #Preview {
     NavigationStack{
