@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+
+
+import SwiftUI
+
 struct Home: View {
     let userProfile: UserProfile
 
+    @State private var sortByDistance = true
+
     var filteredOpportunities: [Opportunity] {
-        Opportunities.filter { opportunity in
+        let filtered = Opportunities.filter { opportunity in
             userProfile.interests.contains(opportunity.interestTag) &&
             userProfile.age >= opportunity.minimumAge &&
             haversine(
@@ -21,32 +27,94 @@ struct Home: View {
                 long2: opportunity.long
             ) <= userProfile.mileRadius
         }
+
+        if sortByDistance {
+            return filtered.sorted {
+                haversine(
+                    lat1: userProfile.lat,
+                    long1: userProfile.long,
+                    lat2: $0.lat,
+                    long2: $0.long
+                ) <
+                haversine(
+                    lat1: userProfile.lat,
+                    long1: userProfile.long,
+                    lat2: $1.lat,
+                    long2: $1.long
+                )
+            }
+        } else {
+            return filtered.sorted {
+                $0.date < $1.date
+            }
+        }
     }
 
     var body: some View {
         ZStack {
             Color.offWhite
                 .ignoresSafeArea()
+        
 
             VStack {
-                Spacer()
-
+                
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
                     .padding()
-
-                ScrollView {
-                    LazyVStack(spacing: 20) {
-                        ForEach(filteredOpportunities) { opportunity in
-                            OpportunityCard(opportunity: opportunity, userProfile: userProfile)
+                ZStack{
+                    RoundedRectangle(cornerRadius: 18)
+                        .fill(Color.darkerGreen)
+                        .frame(width: 365, height: 50)
+                        
+                    
+                    HStack {
+                        Text("Sort by:")
+                            .foregroundStyle(Color.offWhite)
+                            .font(.system(size: 18, weight: .bold))
+                            .padding(.leading, 50)
+                    
+                        Spacer()
+                        
+                        Button {
+                            sortByDistance = true
+                        } label: {
+                            Text("Distance")
+                                .fontWeight(.semibold)
+                                .frame(width: 120, height: 30)
+                                .background(Color.beige)
+                                .foregroundColor(.darkerGreen)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
                         }
                         
-                        if filteredOpportunities.isEmpty {
-                            Text("No opportunities match your filters. Try changing your interests.")
-                                .foregroundColor(.secondary)
+                        Button {
+                            sortByDistance = false
+                        } label: {
+                            Text("Date")
+                                .fontWeight(.semibold)
+                                .frame(width: 70, height: 30)
+                                .background(Color.beige)
+                                .foregroundColor(.darkerGreen)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                        }
+                        
+                        
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                    }
+                }
+                
+
+                ScrollView {
+                    LazyVStack {
+                        ForEach(filteredOpportunities) { opportunity in
+                            OpportunityCard(
+                                opportunity: opportunity,
+                                userProfile: userProfile
+                            )
                         }
                     }
-                    .padding()
+                    .padding(.top)
                 }
             }
         }
