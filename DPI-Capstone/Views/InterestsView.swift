@@ -2,8 +2,8 @@ import SwiftUI
 
 struct InterestsView: View {
 
-    @State var user: UserProfile
-    @State private var selectedOptions: Set<Interests> = []
+    @ObservedObject var user: UserProfile   // was: var user: UserProfile
+      @State private var selectedOptions: Set<Interests> = []
 
     let options: [Interests] = [
         .animalWelfare,
@@ -84,7 +84,7 @@ struct InterestsView: View {
                 .padding(.horizontal, 24)
 
                 NavigationLink {
-                    Home(userProfile: UserProfile(name: user.name, lat: user.lat, long: user.long, interests: Array(selectedOptions), mileRadius: user.mileRadius, age: user.age))
+                    Home(userProfile: user)
                 } label: {
                     Text("Next")
                         .fontWeight(.semibold)
@@ -96,10 +96,7 @@ struct InterestsView: View {
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 30)
-                .simultaneousGesture(TapGesture().onEnded {
-                    user.interests = Array(selectedOptions)
-                    print(user)
-                })
+
 
                 Spacer()
             }
@@ -112,18 +109,17 @@ struct InterestsView: View {
         } else {
             selectedOptions.insert(option)
         }
+        
+        user.interests = Array(selectedOptions)
     }
 }
 
 #Preview {
     InterestsView(
         user: UserProfile(
-            name: "Advika",
-            lat: 41.88,
-            long: -87.62,
-            interests: [],
-            mileRadius: 10,
-            age: 17
+            name: "Advika", lat: 41.88, long: -87.62,
+            interests: [], mileRadius: 10, age: 17,
+            interestedOpportunities: [], hourLog: []
         )
     )
 }

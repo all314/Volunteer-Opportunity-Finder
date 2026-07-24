@@ -100,7 +100,8 @@ struct ContentView: View {
                                 long: long ?? 0,
                                 interests: [],
                                 mileRadius: mileRadius ?? 0,
-                                age: age ?? 0
+                                age: age ?? 0, interestedOpportunities: [],
+                                hourLog: []
                             )
                         )
                     } label: {

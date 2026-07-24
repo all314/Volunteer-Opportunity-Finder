@@ -7,14 +7,10 @@
 
 import SwiftUI
 
-
-
-import SwiftUI
-
 struct Home: View {
-    let userProfile: UserProfile
-
-    @State private var sortByDistance = true
+    @ObservedObject var userProfile: UserProfile
+    @State var sortByDistance: Bool = true
+    var showLog: Bool = false
 
     var filteredOpportunities: [Opportunity] {
         let filtered = Opportunities.filter { opportunity in
@@ -57,6 +53,37 @@ struct Home: View {
         
 
             VStack {
+                
+                HStack(spacing: 24) {
+                    NavigationLink {
+                        InterestedOppView(userProfile: userProfile)
+                    } label: {
+                        VStack(spacing: 5) {
+                            Image(systemName: "heart")
+                                .font(.title3)
+
+                            Text("Interested")
+                                .font(.caption)
+                        }
+                    }
+
+                    NavigationLink {
+                        HourLogView(userProfile: userProfile)
+                    } label: {
+                        VStack(spacing: 5) {
+                            Image(systemName: "clock")
+                                .font(.title3)
+
+                            Text("Hour Log")
+                                .font(.caption)
+                        }
+                    }
+                }
+                .foregroundStyle(Color.darkerGreen)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.horizontal, 28)
+                .fontWeight(.semibold)
+                
                 
                 Text("Opportunities Near You")
                     .font(.system(size: 32, weight: .bold))
@@ -154,9 +181,11 @@ struct Home: View {
             name: "Alina",
             lat: 41.88,
             long: -87.62,
-            interests: [],
+            interests: [.animalWelfare, .artMusic],
             mileRadius: 20.0,
-            age: 16
+            age: 16,
+            interestedOpportunities: [],
+            hourLog: []
         )
     )
 }

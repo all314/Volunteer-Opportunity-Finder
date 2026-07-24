@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum Interests: String{
     case animalWelfare = "Animal Welfare"
@@ -16,13 +17,29 @@ enum Interests: String{
     case artMusic = "Arts & Music"
 }
 
-struct UserProfile {
+class UserProfile: ObservableObject, Identifiable {
     var name: String
     var lat: Double
     var long: Double
     var interests: [Interests]
     var mileRadius: Double
     var age: Int
+
+    @Published var interestedOpportunities: [Opportunity]
+    var hourLog: [loggedHour]
+
+    init(name: String, lat: Double, long: Double, interests: [Interests],
+         mileRadius: Double, age: Int, interestedOpportunities: [Opportunity],
+         hourLog: [loggedHour]) {
+        self.name = name
+        self.lat = lat
+        self.long = long
+        self.interests = interests
+        self.mileRadius = mileRadius
+        self.age = age
+        self.interestedOpportunities = interestedOpportunities
+        self.hourLog = hourLog
+    }
 }
 
 struct Opportunity: Identifiable {
@@ -40,6 +57,7 @@ struct Opportunity: Identifiable {
     var address: String
     var website: String
     var contact: String
+    var interested: Bool = false //if the user is interested in this one or not.
     
 }
 

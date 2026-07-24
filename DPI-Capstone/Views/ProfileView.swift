@@ -79,7 +79,9 @@ struct ProfileView: View {
 
                     NavigationLink {
                         
-                        InterestsView(user: UserProfile(name: name, lat: lat ?? 0, long: long ?? 0, interests: [], mileRadius: mileRadius ?? 0, age: age ?? 16))
+                        InterestsView(user: UserProfile(name: name, lat: lat ?? 0, long: long ?? 0, interests: [], mileRadius: mileRadius ?? 0, age: age ?? 16,
+                                                        interestedOpportunities: [],
+                            hourLog: []))
                         
                     } label: {
                         Text("Next")

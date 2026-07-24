@@ -6,20 +6,58 @@
 //
 
 import SwiftUI
+import Combine
 
 struct OpportunityCard: View {
     
-    let opportunity: Opportunity
+    @State var opportunity: Opportunity //passes in the opportunity for this card
+    @ObservedObject var userProfile: UserProfile
+    var showLog: Bool = false //controls whether the button on the card allows user to log time or to mark interested based on which view they're on
     
-    let userProfile: UserProfile
+    @State private var showingHoursAlert = false //controls if the user chooses to log hours, then this is true
+    @State private var hours = "" //the hours the user wants to log
     
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             
-            Image(opportunity.logo)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 120, height: 100, alignment: .leading)
+            HStack{
+                Image(opportunity.logo)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 130, height: 130, alignment: .leading)
+                Spacer()
+                
+                if !showLog{
+                    Button {
+                        opportunity.interested.toggle()
+                            if opportunity.interested {
+                                userProfile.interestedOpportunities.append(opportunity)
+                            } else {
+                                userProfile.interestedOpportunities.removeAll { $0.id == opportunity.id }
+                            } //removes the opportunity from interested, using its ID
+                    } label: {
+                        Text(opportunity.interested ? " Interested" : "Not Interested")
+                            .font(.system(size: 14))
+                            .fontWeight(.medium)
+                            .frame(maxWidth: 120, maxHeight: 30)
+                            .background(opportunity.interested ? Color.lightGreen : Color.beige2)
+                            .foregroundColor(opportunity.interested ? Color.offWhite : .darkerGreen)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                } else{
+                    Button{
+                        showingHoursAlert = true //if they press log hours then it shows the alert
+                    } label: {
+                        Text("Log Hours")
+                            .font(.system(size: 14))
+                            .fontWeight(.medium)
+                            .frame(maxWidth: 120, maxHeight: 30)
+                            .background(Color.beige2)
+                            .foregroundColor(.darkerGreen)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }}
+                
+            }
             
             Text(opportunity.organization)
                 .font(.title2)
@@ -57,7 +95,7 @@ struct OpportunityCard: View {
             
             
             HStack{
-                //why aren't the icons showing up?
+
                 Image(systemName: "link")
                 Link("Website Link", destination: URL(string: "\(opportunity.website)")!)
             }
@@ -67,9 +105,6 @@ struct OpportunityCard: View {
                     .padding(.vertical, 2)
                 Link("Contact Info", destination: URL(string: "\(opportunity.contact)")!)
             }
-            
-            
-            
             
         }
         .padding(26)
@@ -85,9 +120,22 @@ struct OpportunityCard: View {
                 )
         }
         .padding(.horizontal, 20)
-        
-        
-    }
+        .alert("Log Hours", isPresented: $showingHoursAlert) {
+                    TextField("Number of hours", text: $hours)
+                    Button("Save") {
+                        if let hours = Double(hours) {
+                            userProfile.hourLog.append(loggedHour(organization: opportunity.organization, hours: hours, date: Date.now)) //if hours is a valid number then it adds it to the user's log. also gets what time the entry was made at. 
+                        }
+                        hours = ""
+                    }
+                    Button("Cancel", role: .cancel) {
+                        hours = ""
+                    }
+                } message: {
+                    Text("How many hours do you want to log for \(opportunity.organization)?")
+                }
+            }
+        }
     
     struct InfoSection: View {
         
@@ -114,7 +162,7 @@ struct OpportunityCard: View {
         }
     }
     
-}
+
 #Preview {
-    OpportunityCard(opportunity: Opportunities[7], userProfile: UserProfile(name: "Alina", lat: 41.88, long: -87.62, interests: [.humanService, .healthcare], mileRadius: 15, age: 16))
+    OpportunityCard(opportunity: Opportunities[7], userProfile: UserProfile(name: "Alina", lat: 41.88, long: -87.62, interests: [.humanService, .healthcare], mileRadius: 15, age: 16, interestedOpportunities: [], hourLog: []))
 }
