@@ -14,7 +14,7 @@ struct OpportunityCard: View {
     @ObservedObject var userProfile: UserProfile
     var showLog: Bool = false //controls whether the button on the card allows user to log time or to mark interested based on which view they're on
     
-    @State private var showingHoursAlert = false //controls if the user chooses to log hours, then this is true
+    @State private var showLogPrompt = false //controls if the user chooses to log hours, then this is true
     @State private var hours = "" //the hours the user wants to log
     
     var body: some View {
@@ -46,7 +46,7 @@ struct OpportunityCard: View {
                     }
                 } else{
                     Button{
-                        showingHoursAlert = true //if they press log hours then it shows the alert
+                        showLogPrompt = true //if they press log hours then it shows the alert
                     } label: {
                         Text("Log Hours")
                             .font(.system(size: 14))
@@ -120,7 +120,7 @@ struct OpportunityCard: View {
                 )
         }
         .padding(.horizontal, 20)
-        .alert("Log Hours", isPresented: $showingHoursAlert) {
+        .alert("Log Hours", isPresented: $showLogPrompt) {
                     TextField("Number of hours", text: $hours)
                     Button("Save") {
                         if let hours = Double(hours) {

@@ -12,7 +12,7 @@ struct Home: View {
     @State var sortByDistance: Bool = true
     var showLog: Bool = false
 
-    var filteredOpportunities: [Opportunity] {
+    var filteredOpportunities: [Opportunity] { //filters opportunities to user info
         let filtered = Opportunities.filter { opportunity in
             userProfile.interests.contains(opportunity.interestTag) &&
             userProfile.age >= opportunity.minimumAge &&
@@ -24,7 +24,7 @@ struct Home: View {
             ) <= userProfile.mileRadius
         }
 
-        if sortByDistance {
+        if sortByDistance { //sorts the filtered options depending on if they want to sort by distance or date
             return filtered.sorted {
                 haversine(
                     lat1: userProfile.lat,

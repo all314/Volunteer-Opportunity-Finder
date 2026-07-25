@@ -37,8 +37,8 @@ struct InterestsView: View {
                 
                 Spacer()
                 
-                Text("What opportunities are you interested in?")
-                    .font(.system(size: 30, weight: .semibold))
+                Text("What types of volunteer opportunities interest you?")
+                    .font(.system(size: 28, weight: .semibold))
                     .padding(.horizontal, 20)
                     .padding(.bottom, 50)
 
