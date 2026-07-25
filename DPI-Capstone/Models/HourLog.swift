@@ -7,10 +7,13 @@
 
 import Foundation
 
-struct loggedHour{
+struct loggedHour: Identifiable{
+    
+    let id = UUID()
     
     let organization: String
     let hours: Double
     let date: Date
+    let logo: String
     
 }

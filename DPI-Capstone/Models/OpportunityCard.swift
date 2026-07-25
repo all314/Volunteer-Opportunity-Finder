@@ -27,7 +27,7 @@ struct OpportunityCard: View {
                     .frame(width: 130, height: 130, alignment: .leading)
                 Spacer()
                 
-                if !showLog{
+                if !showLog{ //if it's home screen
                     Button {
                         opportunity.interested.toggle()
                             if opportunity.interested {
@@ -124,7 +124,7 @@ struct OpportunityCard: View {
                     TextField("Number of hours", text: $hours)
                     Button("Save") {
                         if let hours = Double(hours) {
-                            userProfile.hourLog.append(loggedHour(organization: opportunity.organization, hours: hours, date: Date.now)) //if hours is a valid number then it adds it to the user's log. also gets what time the entry was made at. 
+                            userProfile.hourLog.append(loggedHour(organization: opportunity.organization, hours: hours, date: Date.now, logo: opportunity.logo)) //if hours is a valid number then it adds it to the user's log. also gets what time the entry was made at. 
                         }
                         hours = ""
                     }
