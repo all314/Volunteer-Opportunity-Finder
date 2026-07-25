@@ -71,7 +71,7 @@ struct OpportunityCard: View {
                     lines: [
                         //formats the mile distance, and adds the address of the organization.
                         String(format: "%.1f miles away", haversine(lat1: userProfile.lat, long1: userProfile.long, lat2: opportunity.lat, long2: opportunity.long)),
-                        "\(opportunity.address)"
+                        "\(opportunity.address)",
                     ]
                 )
                 
@@ -80,7 +80,11 @@ struct OpportunityCard: View {
                     //the times of the opportunity
                     
                     icon: "clock",
-                    lines: [opportunity.date
+                    lines: [opportunity.date,
+                            opportunity.commitment == 1 ? (opportunity.isWeekly ? "1 hr/week" : "1 hr") : (opportunity.isWeekly ? "\(opportunity.commitment) hrs/week" : "\(opportunity.commitment) hrs")
+                            
+                            //so if it's weekly then it says per week, vs. if it's not then it's just a one-off
+                            
                     ]
                 )
             }

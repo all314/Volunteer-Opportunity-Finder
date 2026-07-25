@@ -58,6 +58,7 @@ struct Opportunity: Identifiable {
     var website: String
     var contact: String
     var interested: Bool = false //if the user is interested in this one or not.
+    var isWeekly: Bool
     
 }
 
