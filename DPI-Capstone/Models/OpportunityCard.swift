@@ -2,171 +2,290 @@
 //  OpportunityCard.swift
 //  DPI-Capstone
 //
-//  Created by DPI Student 009 on 7/15/26.
-//
 
 import SwiftUI
 import Combine
 
 struct OpportunityCard: View {
     
-    @State var opportunity: Opportunity //passes in the opportunity for this card
+    @State var opportunity: Opportunity
     @ObservedObject var userProfile: UserProfile
-    var showLog: Bool = false //controls whether the button on the card allows user to log time or to mark interested based on which view they're on
+    var showLog: Bool = false
     
-    @State private var showLogPrompt = false //controls if the user chooses to log hours, then this is true
-    @State private var hours = "" //the hours the user wants to log
+    @State private var showLogPrompt = false
+    @State private var hours = ""
+    
     
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 18) {
             
-            HStack{
+            
+            // Top section
+            HStack(alignment: .top) {
+                
                 Image(opportunity.logo)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 130, height: 130, alignment: .leading)
+                    .frame(width: 85, height: 85)
+                    .padding(8)
+                    .background(Color.offWhite)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                
+                
+                VStack(alignment: .leading, spacing: 6) {
+                    
+                    Text(opportunity.organization)
+                        .font(.system(size: 22, weight: .bold))
+                        .foregroundStyle(Color.darkerGreen)
+                    
+                    
+                    Text(opportunity.interestTag.rawValue)
+                        .font(.system(size: 13, weight: .semibold))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .background(Color.sage.opacity(0.25))
+                        .foregroundStyle(Color.darkerGreen)
+                        .clipShape(Capsule())
+                    
+                }
+                
                 Spacer()
                 
-                if !showLog{ //if it's home screen
+                
+                if !showLog {
+                    
                     Button {
                         opportunity.interested.toggle()
-                            if opportunity.interested {
-                                userProfile.interestedOpportunities.append(opportunity)
-                            } else {
-                                userProfile.interestedOpportunities.removeAll { $0.id == opportunity.id }
-                            } //removes the opportunity from interested, using its ID
+                        
+                        if opportunity.interested {
+                            userProfile.interestedOpportunities.append(opportunity)
+                        } else {
+                            userProfile.interestedOpportunities.removeAll {
+                                $0.id == opportunity.id
+                            }
+                        }
+                        
                     } label: {
-                        Text(opportunity.interested ? " Interested" : "Not Interested")
-                            .font(.system(size: 14))
-                            .fontWeight(.medium)
-                            .frame(maxWidth: 120, maxHeight: 30)
-                            .background(opportunity.interested ? Color.lightGreen : Color.beige2)
-                            .foregroundColor(opportunity.interested ? Color.offWhite : .darkerGreen)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        
+                        Text(opportunity.interested ? "✓ Saved" : "♡ Save")
+                            .font(.system(size: 14, weight: .semibold))
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
+                            .background(
+                                opportunity.interested
+                                ? Color.sage
+                                : Color.beige2
+                            )
+                            .foregroundColor(
+                                opportunity.interested
+                                ? Color.white
+                                : Color.darkerGreen
+                            )
+                            .clipShape(Capsule())
                     }
-                } else{
-                    Button{
-                        showLogPrompt = true //if they press log hours then it shows the alert
+                    
+                } else {
+                    
+                    Button {
+                        showLogPrompt = true
                     } label: {
+                        
                         Text("Log Hours")
-                            .font(.system(size: 14))
-                            .fontWeight(.medium)
-                            .frame(maxWidth: 120, maxHeight: 30)
+                            .font(.system(size: 14, weight: .semibold))
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
                             .background(Color.beige2)
-                            .foregroundColor(.darkerGreen)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }}
+                            .foregroundColor(Color.darkerGreen)
+                            .clipShape(Capsule())
+                    }
+                }
                 
             }
             
-            Text(opportunity.organization)
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundStyle(Color.darkerGreen)
             
-            HStack(alignment: .top, spacing: 24) {
+            
+            Divider()
+            
+            
+            
+            // Information
+            HStack(alignment: .top, spacing: 15) {
                 
                 InfoSection(
-                    icon: "mappin",
+                    icon: "mappin.circle.fill",
                     lines: [
-                        //formats the mile distance, and adds the address of the organization.
-                        String(format: "%.1f miles away", haversine(lat1: userProfile.lat, long1: userProfile.long, lat2: opportunity.lat, long2: opportunity.long)),
-                        "\(opportunity.address)",
+                        String(
+                            format: "%.1f miles away",
+                            haversine(
+                                lat1: userProfile.lat,
+                                long1: userProfile.long,
+                                lat2: opportunity.lat,
+                                long2: opportunity.long
+                            )
+                        ),
+                        opportunity.address
                     ]
                 )
                 
+                
                 InfoSection(
-                    
-                    //the times of the opportunity
-                    
-                    icon: "clock",
-                    lines: [opportunity.date,
-                            opportunity.commitment == 1 ? (opportunity.isWeekly ? "1 hr/week" : "1 hr") : (opportunity.isWeekly ? "\(opportunity.commitment) hrs/week" : "\(opportunity.commitment) hrs")
-                            
-                            //so if it's weekly then it says per week, vs. if it's not then it's just a one-off
-                            
+                    icon: "clock.fill",
+                    lines: [
+                        opportunity.date,
+                        opportunity.commitment == 1
+                        ? (opportunity.isWeekly ? "1 hr/week" : "1 hr")
+                        : (opportunity.isWeekly
+                           ? "\(opportunity.commitment) hrs/week"
+                           : "\(opportunity.commitment) hrs")
                     ]
                 )
+                
             }
             
-            Text("Description:")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundStyle(Color.darkerGreen)
+            
             
             Text(opportunity.description)
+                .font(.system(size: 15))
                 .foregroundStyle(Color.darkerGreen)
+                .lineSpacing(4)
             
             
-            HStack{
-
-                Image(systemName: "link")
-                Link("Website Link", destination: URL(string: "\(opportunity.website)")!)
+            
+            HStack(spacing: 12) {
+                
+                Link(destination: URL(string: opportunity.website)!) {
+                    
+                    HStack {
+                        Image(systemName: "globe")
+                        Text("Website")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(Color.sage)
+                    .foregroundColor(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
+                
+                
+                
+                Link(destination: URL(string: opportunity.contact)!) {
+                    
+                    HStack {
+                        Image(systemName: "envelope.fill")
+                        Text("Contact")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(Color.darkerGreen)
+                    .foregroundColor(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
+                
             }
             
-            HStack{
-                Image(systemName: "envelope.badge.person.crop.fill")
-                    .padding(.vertical, 2)
-                Link("Contact Info", destination: URL(string: "\(opportunity.contact)")!)
-            }
             
         }
-        .padding(26)
-        .frame(maxWidth: .infinity, minHeight: 520, alignment: .topLeading)
+        .padding(22)
         .background {
-            RoundedRectangle(cornerRadius: 18)
-                .fill(.white)
+            
+            RoundedRectangle(cornerRadius: 28)
+                .fill(Color.white)
                 .shadow(
-                    color: .black.opacity(0.18),
-                    radius: 5,
-                    x: 3,
-                    y: 5
+                    color: .black.opacity(0.12),
+                    radius: 12,
+                    x: 0,
+                    y: 6
                 )
+            
         }
         .padding(.horizontal, 20)
         .alert("Log Hours", isPresented: $showLogPrompt) {
-                    TextField("Number of hours", text: $hours)
-                    Button("Save") {
-                        if let hours = Double(hours) {
-                            userProfile.hourLog.append(loggedHour(organization: opportunity.organization, hours: hours, date: Date.now, logo: opportunity.logo)) //if hours is a valid number then it adds it to the user's log. also gets what time the entry was made at. 
-                        }
-                        hours = ""
-                    }
-                    Button("Cancel", role: .cancel) {
-                        hours = ""
-                    }
-                } message: {
-                    Text("How many hours do you want to log for \(opportunity.organization)?")
+            
+            TextField("Number of hours", text: $hours)
+            
+            Button("Save") {
+                
+                if let hours = Double(hours) {
+                    userProfile.hourLog.append(
+                        loggedHour(
+                            organization: opportunity.organization,
+                            hours: hours,
+                            date: Date.now,
+                            logo: opportunity.logo
+                        )
+                    )
                 }
+                
+                hours = ""
             }
+            
+            Button("Cancel", role: .cancel) {
+                hours = ""
+            }
+            
+        } message: {
+            
+            Text("How many hours do you want to log for \(opportunity.organization)?")
+            
         }
+        
+    }
+    
+    
     
     struct InfoSection: View {
         
         let icon: String
         let lines: [String]
         
+        
         var body: some View {
-            HStack(alignment: .top, spacing: 12) {
+            
+            HStack(alignment: .top, spacing: 10) {
                 
                 Image(systemName: icon)
-                    .font(.system(size: 38))
+                    .font(.system(size: 24))
                     .foregroundStyle(Color.darkerGreen)
-                    .frame(width: 42)
+                    .frame(width: 30)
                 
-                VStack(alignment: .leading, spacing: 3) {
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    
                     ForEach(lines, id: \.self) { line in
+                        
                         Text(line)
-                            .font(.system(size: 16))
+                            .font(.system(size: 14))
+                        
                     }
+                    
                 }
                 .foregroundStyle(Color.darkerGreen)
+                
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            
         }
+        
     }
     
+}
+
 
 #Preview {
-    OpportunityCard(opportunity: Opportunities[7], userProfile: UserProfile(name: "Alina", lat: 41.88, long: -87.62, interests: [.humanService, .healthcare], mileRadius: 15, age: 16, interestedOpportunities: [], hourLog: []))
+    OpportunityCard(
+        opportunity: Opportunities[7],
+        userProfile: UserProfile(
+            name: "Alina",
+            lat: 41.88,
+            long: -87.62,
+            interests: [.humanService, .healthcare],
+            mileRadius: 15,
+            age: 16,
+            interestedOpportunities: [],
+            hourLog: []
+        )
+    )
 }
