@@ -29,7 +29,7 @@ struct ContentView: View {
                 ZStack {
 
                     Circle()
-                        .fill(Color.sage)
+                        .fill(Color.darkerGreen)
                         .frame(width: 95, height: 95)
 
 
@@ -94,7 +94,7 @@ struct ContentView: View {
                     }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.sage)
+                        .background(Color.darkerGreen)
                         .foregroundColor(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
 
