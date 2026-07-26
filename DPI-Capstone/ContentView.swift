@@ -8,6 +8,8 @@ struct ContentView: View {
     @State private var name: String = ""
     @State private var mileRadius: Double? = nil
     @State private var age: Int? = nil
+    @State var lat: Double? = nil
+    @State var long: Double? = nil
 
     @StateObject private var locationManager = LocationManager()
 
@@ -49,7 +51,7 @@ struct ContentView: View {
                         .font(.system(size: 34, weight: .bold))
 
 
-                    Text("See a need...take the lead!")
+                    Text("See a need, take the lead!")
                         .foregroundStyle(.secondary)
 
                 }
@@ -76,7 +78,9 @@ struct ContentView: View {
 
                     Button {
 
-                        locationManager.requestLocation()
+                        lat = 41.881832
+                        long = -87.623109
+                        locationManager.requestLocation() //so it still runs the api and also triggers the location prompt but the actual coords it reads are the hardcoded ones
 
                     } label: {
 
@@ -116,19 +120,12 @@ struct ContentView: View {
                             user: UserProfile(
 
                                 name: name,
-
-                                lat: locationManager.latitude,
-
-                                long: locationManager.longitude,
-
+                                lat: lat ?? 0,
+                                long: long ?? 0,
                                 interests: [],
-
                                 mileRadius: mileRadius ?? 10,
-
                                 age: age ?? 0,
-
                                 interestedOpportunities: [],
-
                                 hourLog: []
 
                             )
