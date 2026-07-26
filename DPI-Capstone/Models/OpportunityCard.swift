@@ -29,8 +29,6 @@ struct OpportunityCard: View {
                     .scaledToFit()
                     .frame(width: 85, height: 85)
                     .padding(8)
-                    .background(Color.offWhite)
-                    .clipShape(RoundedRectangle(cornerRadius: 18))
                 
                 
                 VStack(alignment: .leading, spacing: 6) {
@@ -41,10 +39,10 @@ struct OpportunityCard: View {
                     
                     
                     Text(opportunity.interestTag.rawValue)
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.system(size: 13, weight: .medium))
                         .padding(.horizontal, 12)
                         .padding(.vertical, 5)
-                        .background(Color.sage.opacity(0.25))
+                        .background(Color.darkerGreen.opacity(0.25))
                         .foregroundStyle(Color.darkerGreen)
                         .clipShape(Capsule())
                     
@@ -52,9 +50,9 @@ struct OpportunityCard: View {
                 
                 Spacer()
                 
-                
+                //what button is shown depends on if the user is on the home or interested page
                 if !showLog {
-                    
+                    //like if they're on the home page then the button toggles the interested
                     Button {
                         opportunity.interested.toggle()
                         
@@ -74,7 +72,7 @@ struct OpportunityCard: View {
                             .padding(.vertical, 8)
                             .background(
                                 opportunity.interested
-                                ? Color.sage
+                                ? Color.darkerGreen
                                 : Color.beige2
                             )
                             .foregroundColor(
@@ -86,7 +84,7 @@ struct OpportunityCard: View {
                     }
                     
                 } else {
-                    
+                    //and if they're on the interested page then the button helps them log hours
                     Button {
                         showLogPrompt = true
                     } label: {
@@ -103,9 +101,6 @@ struct OpportunityCard: View {
                 
             }
             
-            
-            
-            Divider()
             
             
             
@@ -163,7 +158,7 @@ struct OpportunityCard: View {
                     .font(.system(size: 14, weight: .semibold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
-                    .background(Color.sage)
+                    .background(Color.darkerGreen)
                     .foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
                 }

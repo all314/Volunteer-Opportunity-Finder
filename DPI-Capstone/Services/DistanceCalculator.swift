@@ -5,6 +5,8 @@
 //  Created by DPI Student 009 on 7/9/26.
 //
 
+//haversine function! calculates distance between two pairs of coordinates
+
 import Foundation
 
 func haversine(lat1: Double, long1: Double, lat2: Double, long2: Double) -> Double {

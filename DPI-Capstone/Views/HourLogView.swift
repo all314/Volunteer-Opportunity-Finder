@@ -21,7 +21,7 @@ struct HourLogView: View {
                 total += entry.hours
             }
             return total
-        }
+        } //computed property for total hours
         
         ZStack{
             Color.offWhite
@@ -35,7 +35,7 @@ struct HourLogView: View {
                 
                 
                 if userProfile.hourLog.isEmpty{
-                    Spacer()
+                    Spacer() //if no hours logged for the user
                     
                     Image(systemName: "exclamationmark.message.fill")
                         .resizable()
@@ -52,12 +52,18 @@ struct HourLogView: View {
                     Spacer()
                     Spacer()
                 } else{
+                        
                     Text("\(total, specifier: "%.1f") hours volunteered!")
-                        .font(.system(size: 20))
+                        .font(.system(size: 20, weight: .semibold))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .background(Color.darkerGreen.opacity(0.25))
+                        .foregroundStyle(Color.darkerGreen)
+                        .clipShape(Capsule())
                     
                     ScrollView {
                         LazyVStack {
-                            
+                            //displays log card for each hour logged
                             ForEach(userProfile.hourLog) { entry in
                                 LogCard(
                                     entry: entry
@@ -79,7 +85,7 @@ struct HourLogView: View {
 #Preview {
     HourLogView(userProfile: UserProfile(name: "Alina", lat: 48.11, long: 62.87, interests: [], mileRadius: 2, age: 16, interestedOpportunities: [], hourLog: [
         
-      //  loggedHour(organization: "The Grace Network", hours: 2.3, date: Date(), logo: "GraceNetwork"),
+      loggedHour(organization: "The Grace Network", hours: 2.3, date: Date(), logo: "GraceNetwork"),
 
       //  loggedHour(organization: "The Clare", hours: 2.1, date: Date(), logo: "Clare")
         

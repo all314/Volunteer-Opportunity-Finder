@@ -1,6 +1,6 @@
 import Foundation
 
-
+//library of opportunities
 let Opportunities: [Opportunity] = [
     Opportunity(lat: 41.844,
                 long: -87.71,

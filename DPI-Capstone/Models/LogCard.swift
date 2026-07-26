@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct LogCard: View {
-    let entry: loggedHour
+    let entry: loggedHour //passes in the logged hour the user did
     
     var body: some View {
         
-        
+        //date of the entry
         VStack{
             HStack(spacing: 16) {
                 Text(entry.date, format: .dateTime.month().day())
@@ -24,6 +24,7 @@ struct LogCard: View {
                         .scaledToFit()
                         .frame(width: 60, height: 70)
                         
+                    //other properties of the instance of the loggedHour
                     
                     VStack(spacing: 6){
                         Text(entry.organization)

@@ -7,6 +7,8 @@
 
 import Foundation
 
+//struct for each time the user logs an hour
+
 struct loggedHour: Identifiable{
     
     let id = UUID()

@@ -11,6 +11,7 @@ struct InterestedOppView: View {
     
     @ObservedObject var userProfile: UserProfile
     
+    //filters by whether the array of interestedOpportunities has the id of the opportunity at hand
     var interestedOpportunities: [Opportunity] {
         let filtered = Opportunities.filter { opportunity in
             userProfile.interestedOpportunities.contains {

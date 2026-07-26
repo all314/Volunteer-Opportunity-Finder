@@ -2,6 +2,7 @@ import Foundation
 import CoreLocation
 import Combine
 
+//api
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     private let manager = CLLocationManager()
@@ -45,13 +46,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
         locationFound = true
 
-
-        print("CURRENT LOCATION:")
-        print("Latitude:", latitude)
-        print("Longitude:", longitude)
-
-
-        // Stop after getting the newest location
+        // stop after getting the newest location
         manager.stopUpdatingLocation()
 
     }

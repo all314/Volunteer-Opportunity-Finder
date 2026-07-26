@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct Home: View {
-    @ObservedObject var userProfile: UserProfile
-    @State var sortByDistance: Bool = true
-    var showLog: Bool = false
+    @ObservedObject var userProfile: UserProfile //
+    @State var sortByDistance: Bool = true //automatically sorts by distance
+    var showLog: Bool = false //so the button on the opportunity card saves opportunities and doesn't log
 
     var filteredOpportunities: [Opportunity] { //filters opportunities to user info
         let filtered = Opportunities.filter { opportunity in
@@ -53,7 +53,7 @@ struct Home: View {
         
 
             VStack {
-                
+                //buttons at the top
                 HStack(spacing: 24) {
                     NavigationLink {
                         InterestedOppView(userProfile: userProfile)
@@ -90,7 +90,7 @@ struct Home: View {
                     .padding(.top)
 
                 
-                
+                //displays diff view for if there aren't matches
                 if !filteredOpportunities.isEmpty{
                     
                     ZStack{
@@ -106,7 +106,7 @@ struct Home: View {
                                 .padding(.leading, 50)
                         
                             Spacer()
-                            
+                            //below are buttons that determine what the list is sorted by
                             Button {
                                 sortByDistance = true
                             } label: {
@@ -135,7 +135,7 @@ struct Home: View {
                             Spacer()
                         }
                     }
-                    
+                    //renders each opportunity
                     ScrollView {
                         LazyVStack {
                             ForEach(filteredOpportunities) { opportunity in
@@ -148,7 +148,7 @@ struct Home: View {
                         .padding(.top)
                     }
                 } else{
-                        
+                        //if there are no matches:
                     VStack(alignment: .center){
                         Spacer()
                         
