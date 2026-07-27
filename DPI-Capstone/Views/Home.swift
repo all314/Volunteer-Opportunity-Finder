@@ -40,9 +40,7 @@ struct Home: View {
                 )
             }
         } else {
-            return filtered.sorted {
-                $0.date < $1.date
-            }
+            return filtered
         }
     }
 

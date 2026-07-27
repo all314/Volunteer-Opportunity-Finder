@@ -1,4 +1,4 @@
-//Lat: 41.885826  Long: -87.626955
+//test lat: 41.885826  long: -87.626955
 //hi jeet/kareem!!
 
 import SwiftUI
@@ -9,8 +9,8 @@ struct ContentView: View {
     @State private var name: String = ""
     @State private var mileRadius: Double? = nil
     @State private var age: Int? = nil
-    @State var lat: Double? = nil
-    @State var long: Double? = nil
+    @State private var lat: Double? = nil
+    @State private var long: Double? = nil
 
     @StateObject private var locationManager = LocationManager()
 
@@ -24,28 +24,19 @@ struct ContentView: View {
 
 
             VStack(spacing: 30) {
-
-
+                //logo at the top
                 Spacer()
-
-
                 ZStack {
 
                     Circle()
                         .fill(Color.darkerGreen)
                         .frame(width: 95, height: 95)
-
-
                     Image("AppLogo")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 80)
                         .clipShape(Circle())
-
                 }
-
-
-
                 VStack(spacing: 8) {
 
                     Text("VolunTrack")
@@ -117,6 +108,8 @@ struct ContentView: View {
 
 
                         InterestsView(
+                            
+                            //so when the user clicks next, it passes the data from this page to the next view
 
                             user: UserProfile(
 

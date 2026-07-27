@@ -178,10 +178,7 @@ struct OpportunityCard: View {
                     .foregroundColor(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
-                
             }
-            
-            
         }
         .padding(22)
         .background {
