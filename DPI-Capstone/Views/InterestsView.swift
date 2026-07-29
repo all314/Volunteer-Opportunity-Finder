@@ -2,7 +2,8 @@ import SwiftUI
 
 struct InterestsView: View {
     
-    @ObservedObject var user: UserProfile   // was: var user: UserProfile
+    @ObservedObject var user: UserProfile
+    
     @State private var selectedOptions: Set<Interests> = []
     
     let options: [Interests] = [
@@ -91,7 +92,7 @@ struct InterestsView: View {
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.sage)
+                        .background(Color.darkerGreen)
                         .foregroundColor(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }

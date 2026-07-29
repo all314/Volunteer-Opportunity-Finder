@@ -105,8 +105,6 @@ struct ContentView: View {
 
 
                     NavigationLink {
-
-
                         InterestsView(
                             
                             //so when the user clicks next, it passes the data from this page to the next view
